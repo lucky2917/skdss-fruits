@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
 import './App.css';
-
-function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+import AboutImage from './assets/hero.jpg';
+import berries from './assets/berries.jpeg';
+import citrus from './assets/citrus.jpeg';
+import seasonal from './assets/seasonal.jpeg';
+import tropical from './assets/tropical.jpeg';
+import specials from './assets/specials.jpg';
+import contact from './assets/contact.jpg';
+import videobg from './assets/videobg.mp4';
+export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="App">
-      {/* Header */}
+      {/* Fixed Header */}
       <header className="header">
         <div className="header-container">
           <button 
             className="menu-toggle"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+            onClick={() => setMenuOpen(!menuOpen)}
           >
             <span></span>
             <span></span>
@@ -20,54 +28,232 @@ function App() {
 
           <div className="logo">SKDSS Fruits</div>
 
-          <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
-            <a href="#shop">Shop</a>
-            <a href="#about">About Us</a>
-            <a href="#menu">Menu</a>
-            <a href="#contact">Contact Us</a>
+          <nav className={`nav ${menuOpen ? 'nav-open' : ''}`}>
+            <a href="#shop" onClick={() => setMenuOpen(false)}>Shop</a>
+            <a href="#about" onClick={() => setMenuOpen(false)}>About Us</a>
+            <a href="#menu" onClick={() => setMenuOpen(false)}>Menu</a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact Us</a>
           </nav>
 
           <div className="header-actions">
             <a href="#login" className="login-link">Log In</a>
-            <div className="cart-icon">🛒 <span className="cart-count">0</span></div>
+            <div className="cart-icon">🛒<span className="cart-count">0</span></div>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-logo">
-          <svg viewBox="0 0 100 60" className="fish-icon">
-            <path 
-              d="M15,30 C15,20 25,15 35,20 C40,15 50,15 55,20 C65,15 75,20 75,30 C75,40 65,45 55,40 C50,45 40,45 35,40 C25,45 15,40 15,30 Z" 
-              fill="none" 
-              stroke="#2d5016" 
-              strokeWidth="2"
+      {/* Sidebar overlay */}
+      {menuOpen && <div className="sidebar-overlay" onClick={() => setMenuOpen(false)} />}
+
+      {/* Sidebar menu */}
+      <aside className={`sidebar ${menuOpen ? 'sidebar-open' : ''}`} aria-hidden={!menuOpen}>
+        <div className="sidebar-header">
+          <h2>SKDSS Fruits</h2>
+          <button className="sidebar-close" aria-label="Close menu" onClick={() => setMenuOpen(false)}>×</button>
+        </div>
+        <nav className="sidebar-nav">
+          <a href="#shop" onClick={() => setMenuOpen(false)}>Shop</a>
+          <a href="#about" onClick={() => setMenuOpen(false)}>About Us</a>
+          <a href="#menu" onClick={() => setMenuOpen(false)}>Menu</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact Us</a>
+        </nav>
+        <div className="sidebar-cta">
+          <button className="sidebar-explore-btn">Explore Menu</button>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main>
+        {/* Hero Section */}
+        <section className="hero-section">
+          <div className="fixed-hero-bg" aria-hidden="true" />
+
+          <div className="hero-logo">
+            <svg viewBox="0 0 100 60" className="fish-icon" aria-hidden="true" focusable="false">
+              <path 
+                d="M15,30 C15,20 25,15 35,20 C40,15 50,15 55,20 C65,15 75,20 75,30 C75,40 65,45 55,40 C50,45 40,45 35,40 C25,45 15,40 15,30 Z" 
+                fill="none" 
+                stroke="#2d5016" 
+                strokeWidth="2"
+              />
+              <circle cx="25" cy="28" r="1.5" fill="#2d5016" />
+              <path d="M15,30 L8,25 L8,35 Z" fill="#2d5016" />
+            </svg>
+          </div>
+
+          <div className="fixed-text-container">
+            <span className="fixed-text">SKDSS Fruits</span>
+          </div>
+
+          <div className="hero-content">
+            <h2>Explore our menu filled with<br />culinary wonders</h2>
+            <button className="explore-btn">Explore Menu</button>
+          </div>
+
+          <div className="product-display">
+            <img 
+              src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=80" 
+              alt="Fruits on shelf" 
+              className="product-image" 
+              loading="lazy" 
             />
-            <circle cx="25" cy="28" r="1.5" fill="#2d5016"/>
-            <path d="M15,30 L8,25 L8,35 Z" fill="#2d5016"/>
-          </svg>
-        </div>
+          </div>
 
-        <div className="fixed-text-container">
-          <span className="fixed-text">SKDSS Fruits</span>
-        </div>
+          <div className="scroll-spacer" />
+        </section>
 
-        <div className="hero-content">
-          <h2>Explore our menu filled with<br />culinary wonders</h2>
-          <button className="explore-btn">Explore Menu</button>
+        {/* About Section */}
+        <section className="about-section inverted-grid">
+  <div className="about-text">
+    <h2>Our Story</h2>
+    <p>
+    We began in 2020, right in the middle of the Covid days, with nothing more than a small mango stall by the roadside. People loved our fruits, and their support pushed us forward. By 2021, we opened a modest shop with just a handful of fruits. In 2023, we expanded our collection and introduced juices and fruit baskets. And today, in 2025, SKDSS Fruits stands as a trusted place for fresh, high-quality fruits delivered daily to your home.
+    </p>
+  </div>
+  <div className="about-image-wrapper">
+    <img
+      src={AboutImage}
+      alt="Delicatessen sophisticated"
+      className="about-image"
+    />
+  </div>
+</section>
+<section className="collections-section">
+  <h2 className="collections-heading">Our Collections</h2>
+  <div className="collections-grid">
+      <div className="collection-card">
+        <img src={seasonal} alt="Seasonal" />
+        <h3>Seasonal</h3>
+        <p>Fresh fruits available during the current season, packed with vibrant flavors.</p>
+      </div>
+      <div className="collection-card">
+        <img src={citrus} alt="Citrus" />
+        <h3>Citrus</h3>
+        <p>Zesty and refreshing citrus fruits, perfect for a vitamin C boost.</p>
+      </div>
+      <div className="collection-card">
+        <img src={tropical} alt="Tropical" />
+        <h3>Tropical</h3>
+        <p>Exotic tropical fruits to add a delicious twist to your day.</p>
+      </div>
+      <div className="collection-card">
+        <img src={berries} alt="Berries" />
+        <h3>Berries</h3>
+        <p>Small, juicy berries full of antioxidants and sweet goodness.</p>
+      </div>
+    </div>
+  </section>
+    <section className="special-offer-section">
+      <div className="offer-text-col">
+        <h2>Special Offer</h2>
+        <p className="offer-subtitle">Limited Time Deal</p>
+        <p>Get 20% off on your first order! Use code:</p>
+        <p className="offer-code">DELI20</p>
+      </div>
+      <div className="offer-image-col">
+        <img src={specials} alt="Special Offer" />
+      </div>
+    </section>
+  <div className="contact-border">
+  <section className="contact-section">
+    <div className="contact-left">
+      <div className="contact-image-bg">
+        <img src={contact} alt="Contact background" />
+        <div className="contact-overlay-card">
+          <h2>Get in Touch</h2>
+          <p>
+            Have a question or want to learn more about our menu? Drop us a message, and we'll get back to you as soon as possible.
+          </p>
+          {/* Add your logo/icon at top-right if needed */}
         </div>
+      </div>
+    </div>
+    <div className="contact-right">
+      <form className="contact-form">
+        <div className="contact-row">
+          <div className="contact-field">
+            <label htmlFor="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" />
+          </div>
+          <div className="contact-field">
+            <label htmlFor="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" />
+          </div>
+        </div>
+        <div className="contact-row">
+          <div className="contact-field">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" name="email" />
+          </div>
+          <div className="contact-field">
+            <label htmlFor="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" />
+          </div>
+        </div>
+        <div className="contact-field">
+          <label htmlFor="message">Short answer</label>
+          <input type="text" id="message" name="message" />
+        </div>
+        <button type="submit" className="contact-submit">Submit</button>
+      </form>
+    </div>
+  </section>
+</div>
+<div className="marquee-section">
+  <div className="marquee-track">
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    {/* Add more spans if you want even smoother scroll */}
+  </div>
+</div>
+</main>
+<footer className="footer-section">
+  <video className="footer-video-bg" autoPlay loop muted playsInline>
+    <source src={videobg} type="video/mp4" />
+    {/* Add fallback text */}
+    Your browser does not support the video tag.
+  </video>
 
-        <div className="product-display">
-          <img 
-            src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=80" 
-            alt="Fruits on shelf"
-            className="product-image"
-          />
-        </div>
-      </section>
+  <div className="footer-grid">
+    <div className="footer-brand">
+      <div className="footer-logo">
+        <span>G. Patel<br />& Deli</span>
+        <img src="/assets/mark.svg" alt="" className="footer-mark" />
+      </div>
+      <div className="footer-social">
+        {/* Social icons */}
+        <a href="#"><i className="fa-brands fa-instagram"></i></a>
+        <a href="#"><i className="fa-brands fa-whatsapp"></i></a>
+        <a href="#"><i className="fa-brands fa-envelope"></i></a>
+      </div>
+    </div>
+    <div className="footer-contact">
+      <div>9347043329 | 9010900688<br />arjun.gandreddi2005@gmail.com</div>
+      <div>Railway Market Road - Shop no 20,21,<br />Allipuram, Vizag, Andhra Pradesh<br />INDIA, 530004</div>
+    </div>
+    <div className="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Accessibility Statement</a>
+      <a href="#">Shipping Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Refund Policy</a>
+    </div>
+  </div>
+
+  <div className="footer-bottom">
+    © 2035 by SKDSS Fruits 
+  </div>
+</footer>
+
     </div>
   );
 }
-
-export default App;
