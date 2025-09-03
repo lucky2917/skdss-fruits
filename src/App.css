@@ -1,6 +1,8 @@
 /* Basic reset & fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;700&display=swap');
-
+html {
+  scroll-behavior: smooth;
+}
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +15,10 @@ body, .App {
   color: #2d5016;
   overflow-x: hidden;
   min-height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
 }
+
 
 /* Fixed background inside hero only */
 .fixed-hero-bg {
@@ -72,7 +77,13 @@ body, .App {
 
 .nav {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .nav a {
@@ -81,11 +92,28 @@ body, .App {
   font-weight: 300;
   font-size: 0.95rem;
   letter-spacing: 0.3px;
-  transition: opacity 0.3s;
+  transition: color 0.3s, opacity 0.3s;
+  position: relative;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #4caf50;
+  transition: width 0.3s ease;
 }
 
 .nav a:hover {
-  opacity: 0.7;
+  color: #4caf50;
+  opacity: 1;
+}
+
+.nav a:hover::after {
+  width: 100%;
 }
 
 .header-actions {
@@ -275,25 +303,31 @@ body, .App {
 /* Title */
 .fixed-text-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100vw;
   padding: 0 1rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
   z-index: 2;
 }
 
+
+
 .fixed-text {
-  font-size: clamp(3rem, 12vw, 8rem);
+  font-size: clamp(2.4rem, 11vw, 4.6rem);
   font-weight: 100;
   color: #2d5016;
   letter-spacing: 0.02em;
-  line-height: 1;
-  white-space: nowrap;
-  overflow-wrap: normal;
+  line-height: 1.07;
+  word-break: break-word;
+  overflow-wrap: break-word;
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  width: 100%;
+  margin: 0 auto;
+  white-space: normal;
+  padding: 0;
 }
 
 /* Hero content */
@@ -365,7 +399,7 @@ body, .App {
 }
 
 .about-text {
-  background-color: #155c2c;
+  background: linear-gradient(135deg, #155c2c, #207544);
   color: white;
   padding: 5rem 3rem;
   display: flex;
@@ -453,6 +487,17 @@ body, .App {
     font-size: 1rem;
     padding: 0.8rem 2rem;
   }
+
+  .hero-section {
+    text-align: center;
+    padding-top: 80px;
+  }
+
+  .special-offer-section,
+  .contact-section {
+    transform: scale(0.95);
+    transform-origin: top center;
+  }
 }
 
 
@@ -523,11 +568,14 @@ body, .App {
     max-width: 90vw;
     padding: 0 1rem;
     margin-bottom: 0.75rem;
+    justify-content: center;
+    align-items: center;
   }
 
   .fixed-text {
-    font-size: clamp(2rem, 14vw, 5rem);
+    font-size: clamp(1.6rem, 10vw, 3.8rem);
     letter-spacing: 0.01em;
+    transform: scale(0.95);
   }
 
   .hero-content h2 {
@@ -554,12 +602,21 @@ body, .App {
 
 /* Extra small mobile */
 @media (max-width: 480px) {
-  .fixed-text-container {
-    margin-bottom: 0.5rem;
+.fixed-text-container {
+    max-width: 100vw;
+    margin-bottom: 0.6rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
   .fixed-text {
-    font-size: clamp(1.8rem, 18vw, 4rem);
+    font-size: clamp(2rem, 10vw, 3.6rem);
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
   }
 
   .hero-content h2 {
@@ -576,6 +633,7 @@ body, .App {
   text-align: center;
   max-width: 1200px;
   margin: 0 auto;
+  animation: fadeIn 1.2s ease;
 }
 
 .collections-heading {
@@ -593,18 +651,16 @@ body, .App {
 }
 
 .collection-card {
-  background: white;
-  padding: 1.5rem 1rem 1.2rem 1rem;
-  box-shadow: 0 10px 30px rgba(45, 80, 22, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: default;
-  transition: box-shadow 0.2s;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .collection-card:hover {
-  box-shadow: 0 18px 38px rgba(45, 80, 22, 0.18);
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
 }
 
 .collection-card img {
@@ -646,16 +702,17 @@ body, .App {
   }
 }
 
-
 .special-offer-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: #155c2c;
   align-items: stretch;
   margin: 0;
+  border: 6px solid #206334;  /* Medium thickness green border */
+  box-sizing: border-box;    /* To include border inside size */
+  border-radius: 0;          /* Keep edges sharp */
 }
 
-/* ...existing .offer-text-col, .offer-image-col styles from previous messages... */
 
 .offer-text-col {
   background: #FFFDEB;
@@ -665,7 +722,39 @@ body, .App {
   justify-content: center;
   text-align: left;
 }
+.offer-text-col button {
+  animation: pulse 2s infinite;
+}
 
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.offer-btn {
+  background: green;            /* bright orange */
+  color: #fff;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.offer-btn:hover {
+  background: greenyellow;            /* darker orange */
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.offer-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
 .offer-image-col {
   height: 100%;
   display: flex;
@@ -701,77 +790,75 @@ body, .App {
     text-align: left;
   }
 }
-.contact-border {
-  background: #155c2c;
-  padding: 2.2rem 2.2rem;
-  margin: 3rem auto 5rem auto;
-  max-width: 1200px;
-}
-
 .contact-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: #e2edde;
-  margin: 0;
-  margin-bottom: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Image + overlay (desktop: overlay, mobile: stacked) */
 .contact-left {
   position: relative;
-  background: #e2edde;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  padding: 0;
-  height: 100%;
-  min-width: 280px;
-  min-height: 320px;
+  background: #e2edde;
+  min-width: 220px;
 }
 
 .contact-image-bg {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 
 .contact-image-bg img {
   width: 100%;
   height: 100%;
+  min-height: 320px;
   object-fit: cover;
   display: block;
 }
 
+/* Overlay card: desktop overlays, mobile stacks */
 .contact-overlay-card {
   position: absolute;
-  top: 30px;
-  left: 30px;
-  background: #FFFDEB;
+  top: 32px;
+  left: 32px;
+  right: 32px;
+  background: #fffdeb;
   color: #206334;
-  padding: 2.2rem 2.2rem 2rem 2.2rem;
+  padding: 2rem 2rem 1.7rem 2rem;
   box-shadow: 0 8px 28px rgba(45,80,22,0.11);
-  font-size: 1.05rem;
-  width: 330px;
-  max-width: 100%;
+  font-size: 1.09rem;
+  max-width: 420px;
+  width: auto;
+  box-sizing: border-box;
 }
 
 .contact-overlay-card h2 {
-  font-size: 2rem;
+  font-size: 2.04rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
 .contact-overlay-card p {
-  font-size: 1.09rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
 
+/* Form column */
 .contact-right {
   background: #e2edde;
   padding: 2.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 220px;
+  box-sizing: border-box;
 }
 
 .contact-form {
@@ -782,25 +869,21 @@ body, .App {
   flex-direction: column;
   gap: 1.5rem;
 }
-
 .contact-row {
   display: flex;
   gap: 1.2rem;
 }
-
 .contact-field {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-
 .contact-field label {
   font-size: 1rem;
   color: #206334;
   margin-bottom: 8px;
   font-weight: 400;
 }
-
 .contact-field input {
   background: transparent;
   border: none;
@@ -811,11 +894,9 @@ body, .App {
   outline: none;
   transition: border-color 0.2s;
 }
-
 .contact-field input:focus {
   border-bottom: 2px solid #155c2c;
 }
-
 .contact-submit {
   background: #155c2c;
   color: #FFFDEB;
@@ -827,48 +908,63 @@ body, .App {
   width: 100%;
   margin-top: 1rem;
 }
-
 .contact-submit:hover {
   background: #206334;
 }
 
-/* Responsive for mobile */
+/* Mobile: switch to stacked layout, card below image, no overlay */
 @media (max-width: 900px) {
   .contact-section {
     grid-template-columns: 1fr;
+    max-width: 100vw;
+    width: 100vw;
+    padding: 0;
+    margin: 0 auto;
   }
   .contact-left {
     min-width: 0;
-    min-height: 200px;
-    padding: 0 0 2rem 0;
+    padding: 0;
+    display: block;
+    background: #e2edde;
   }
-  .contact-overlay-card {
-    position: static;
-    margin: 1.5rem auto;
-    left: auto;
-    top: auto;
-    box-shadow: none;
-    width: 90%;
+  .contact-image-bg {
+    position: relative;
+    width: 100vw;
+    height: auto;
+    background: #e2edde;
+    display: block;
   }
   .contact-image-bg img {
+    width: 100vw;
+    height: auto;
     min-height: 180px;
-    height: 200px;
+    display: block;
+    object-fit: cover;
+    margin: 0;
+  }
+  .contact-overlay-card {
+    position: static !important;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin: 1rem auto 1.6rem auto;
+    width: 94vw;
+    max-width: 94vw;
+    background: #fffdeb;
+    box-shadow: 0 4px 14px rgba(45,80,22,0.10);
+    padding: 1.2rem 1rem 1rem 1rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    z-index: 2;
   }
   .contact-right {
     padding: 2rem 1rem;
+    min-width: 0;
+    background: #e2edde;
   }
 }
 
-@media (max-width: 600px) {
-  .contact-border {
-    padding: 1.2rem 0.7rem;
-    margin: 2rem auto 3rem auto;
-  }
-  .contact-overlay-card {
-    font-size: 1rem;
-    padding: 1rem 1rem;
-  }
-}
+
 .marquee-section {
   background: #FFFEF5;
   overflow: hidden;
@@ -912,141 +1008,160 @@ body, .App {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
+/* Container & Background */
 .footer-section {
+  background: #123a1e;
   position: relative;
   color: #fff;
-  width: 100%;
-  padding: 0;
   overflow: hidden;
-  min-height: 350px;
+  min-height: 380px;
+  font-family: 'Inter', 'Georgia', serif;
+  width: 100vw;
 }
 
-.footer-video-bg {
+.footer-bg-image {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  inset: 0;
+  background-image: url('/assets/footer-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.22) blur(8px);
   z-index: 0;
-  pointer-events: none; /* Let clicks pass through */
-  filter: brightness(0.4); /* Darken video for readability */
 }
 
-.footer-grid,
-.footer-bottom {
-  position: relative;
+.footer-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(15,64,34,0.86), rgba(20,40,20,0.78));
   z-index: 1;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 3rem 2rem 2.2rem 2rem;
 }
 
 .footer-grid {
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
   align-items: flex-start;
-  flex-wrap: wrap;
+  gap: 2rem;
 }
 
-/* Keep other footer CSS as before for texts and layout */
-
-
-
 .footer-brand {
+  min-width: 200px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 2.5rem;
+  gap: 1.5rem;
 }
 
 .footer-logo {
+  font-family: 'Georgia', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #d7f7d1;
+  letter-spacing: 0.03em;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-family: 'Inter', 'Georgia', serif;
-  font-size: 2.3rem;
-  font-weight: 500;
-}
-
-.footer-logo span {
-  line-height: 1.15;
+  align-items: center;
+  gap: 1rem;
+  user-select: none;
 }
 
 .footer-mark {
-  margin-top: 1rem;
-  width: 48px;
-  height: 32px;
+  width: 44px;
+  height: auto;
 }
 
 .footer-social {
   display: flex;
-  gap: 1.8rem;
-  font-size: 1.45rem;
+  gap: 1.3rem;
+  font-size: 1.6rem;
 }
 
 .footer-social a {
-  color: #fff;
-  transition: color 0.2s;
+  color: #e2edde;
+  transition: color 0.3s, transform 0.2s;
 }
-
 .footer-social a:hover {
-  color: #d7f7d1;
+  color: #fff;
+  transform: scale(1.14);
 }
 
-.footer-contact, .footer-links {
+/* Premium card look */
+.footer-card {
+  background: #e2edde;
+  color: #1a331a;
+  border-radius: 14px;
+  box-shadow: 0 4px 38px rgba(12,30,12,0.13);
+  padding: 2rem 1.8rem 1.5rem 1.8rem;
+  font-size: 1.09rem;
+  font-weight: 500;
+  min-width: 240px;
+  max-width: 340px;
+  word-break: break-word;
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
-  font-size: 1rem;
-  color: #fff;
-  font-weight: 400;
-  line-height: 1.5;
+  gap: 1.1rem;
 }
 
-.footer-contact div {
-  margin-bottom: 0.8rem;
+.footer-email {
+  word-break: break-all;
 }
 
 .footer-links a {
-  color: #fff;
+  color: #1a331a;
   text-decoration: none;
-  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
   transition: color 0.2s;
 }
-
 .footer-links a:hover {
-  color: #e2edde;
+  color: #25723c;
+  text-decoration: underline;
 }
 
+/* Bottom bar in light green - FULL WIDTH */
 .footer-bottom {
-  width: 100%;
-  background: #d1e0cf;
-  color: #155c2c;
-  font-size: 1rem;
-  text-align: right;
-  padding: 0.85rem 2rem 0.8rem 2rem;
-  letter-spacing: 0.04em;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  background: #e2edde;
+  margin: 0;
+  padding: 1rem 0 0.8rem 0;
+  color: #1a331a;
+  font-size: 1.07rem;
+  font-weight: 600;
+  text-align: center;
+  border-top: 1px solid #c1dac4;
+  letter-spacing: 0.06em;
+  z-index: 5;
 }
 
+/* RESPONSIVE */
 @media (max-width: 900px) {
+  .footer-content {
+    padding: 2rem 0.8rem 1rem 0.8rem;
+  }
   .footer-grid {
     flex-direction: column;
-    gap: 2.5rem;
-    text-align: left;
-    align-items: flex-start;
-    padding: 2.2rem 1.2rem 2.2rem 1.2rem;
+    gap: 1.3rem;
+    align-items: stretch;
   }
-  .footer-logo {
-    font-size: 1.5rem;
+  .footer-brand {
+    align-items: center;
+    margin-bottom: 0.3rem;
   }
-  .footer-mark {
-    width: 36px;
-    height: 22px;
-  }
-  .footer-bottom {
-    padding: 0.9rem 1rem 0.8rem 1rem;
-    font-size: 0.97rem;
-    text-align: left;
-  }
+  .footer-logo { font-size: 2rem; }
+  .footer-card { min-width: unset; max-width: unset; width: 100%; padding: 1.2rem 1rem; }
+  .footer-bottom { font-size: 1rem; padding: 0.7rem 0 0.8rem 0;}
+}
+@media (max-width: 480px) {
+  .footer-logo { font-size: 1.28rem; }
+  .footer-mark { width: 28px;}
+  .footer-card { font-size: 0.99rem; padding: 0.8rem 0.3rem;}
+  .footer-content { padding: 1rem 0.1rem;}
 }

@@ -7,7 +7,7 @@ import seasonal from './assets/seasonal.jpeg';
 import tropical from './assets/tropical.jpeg';
 import specials from './assets/specials.jpg';
 import contact from './assets/contact.jpg';
-import videobg from './assets/videobg.mp4';
+import main from './assets/main.png';
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -86,13 +86,13 @@ export default function App() {
           </div>
 
           <div className="hero-content">
-            <h2>Explore our menu filled with<br />culinary wonders</h2>
+          <h2>Fresh Fruits, Juices & Baskets<br />Delivered to Your Doorstep</h2>
             <button className="explore-btn">Explore Menu</button>
           </div>
 
           <div className="product-display">
             <img 
-              src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=80" 
+              src={main} 
               alt="Fruits on shelf" 
               className="product-image" 
               loading="lazy" 
@@ -113,7 +113,7 @@ export default function App() {
   <div className="about-image-wrapper">
     <img
       src={AboutImage}
-      alt="Delicatessen sophisticated"
+      alt="Fresh fruits shop display"
       className="about-image"
     />
   </div>
@@ -147,113 +147,124 @@ export default function App() {
       <div className="offer-text-col">
         <h2>Special Offer</h2>
         <p className="offer-subtitle">Limited Time Deal</p>
-        <p>Get 20% off on your first order! Use code:</p>
-        <p className="offer-code">DELI20</p>
+        <p>Get 10% off on your first order!</p>
+        <p className="offer-code">Exclusively on site ONLY!</p>
+        <button className="offer-btn">Shop Now</button>
       </div>
       <div className="offer-image-col">
         <img src={specials} alt="Special Offer" />
       </div>
     </section>
-  <div className="contact-border">
-  <section className="contact-section">
-    <div className="contact-left">
-      <div className="contact-image-bg">
-        <img src={contact} alt="Contact background" />
-        <div className="contact-overlay-card">
-          <h2>Get in Touch</h2>
-          <p>
-            Have a question or want to learn more about our menu? Drop us a message, and we'll get back to you as soon as possible.
-          </p>
-          {/* Add your logo/icon at top-right if needed */}
-        </div>
+    <section className="contact-section">
+  <div className="contact-left">
+    <div className="contact-image-bg">
+      <img src={contact} alt="Contact background" />
+      <div className="contact-overlay-card">
+        <h2>Get in Touch</h2>
+        <p>
+          Have a question or want to learn more about our menu? Drop us a message, and we'll get back to you as soon as possible.
+        </p>
       </div>
     </div>
-    <div className="contact-right">
-      <form className="contact-form">
-        <div className="contact-row">
-          <div className="contact-field">
-            <label htmlFor="firstName">First name</label>
-            <input type="text" id="firstName" name="firstName" />
-          </div>
-          <div className="contact-field">
-            <label htmlFor="lastName">Last name</label>
-            <input type="text" id="lastName" name="lastName" />
-          </div>
-        </div>
-        <div className="contact-row">
-          <div className="contact-field">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" />
-          </div>
-          <div className="contact-field">
-            <label htmlFor="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" />
-          </div>
+  </div>
+  <div className="contact-right">
+    <form className="contact-form" onSubmit={(e) => { e.preventDefault(); alert("Thanks for reaching out! We’ll get back soon."); }}>
+      <div className="contact-row">
+        <div className="contact-field">
+          <label htmlFor="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" required/>
         </div>
         <div className="contact-field">
-          <label htmlFor="message">Short answer</label>
-          <input type="text" id="message" name="message" />
+          <label htmlFor="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" />
         </div>
-        <button type="submit" className="contact-submit">Submit</button>
-      </form>
-    </div>
-  </section>
-</div>
+      </div>
+      <div className="contact-row">
+        <div className="contact-field">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" name="email" required/>
+        </div>
+        <div className="contact-field">
+          <label htmlFor="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" />
+        </div>
+      </div>
+      <div className="contact-field">
+        <label htmlFor="message">Short answer</label>
+        <input type="text" id="message" name="message" />
+      </div>
+      <button type="submit" className="contact-submit">Submit</button>
+    </form>
+  </div>
+</section>
+
 <div className="marquee-section">
   <div className="marquee-track">
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
-    <span>DELIGHTFUL BITES&nbsp;&nbsp;</span>
+    <span>FRESH&nbsp;&nbsp;</span>
+    <span>SEASONAL&nbsp;&nbsp;</span>
+    <span>TROPICAL&nbsp;&nbsp;</span>
+    <span>CITRUS&nbsp;&nbsp;</span>
+    <span>BERRIES&nbsp;&nbsp;</span>
+    <span>FRESH&nbsp;&nbsp;</span>
+    <span>SEASONAL&nbsp;&nbsp;</span>
+    <span>TROPICAL&nbsp;&nbsp;</span>
+    <span>CITRUS&nbsp;&nbsp;</span>
+    <span>BERRIES&nbsp;&nbsp;</span>
+    <span>FRESH&nbsp;&nbsp;</span>
+    <span>SEASONAL&nbsp;&nbsp;</span>
+    <span>TROPICAL&nbsp;&nbsp;</span>
+    <span>CITRUS&nbsp;&nbsp;</span>
+    <span>BERRIES&nbsp;&nbsp;</span>
+    <span>FRESH&nbsp;&nbsp;</span>
+    <span>SEASONAL&nbsp;&nbsp;</span>
+    <span>TROPICAL&nbsp;&nbsp;</span>
+    <span>CITRUS&nbsp;&nbsp;</span>
+    <span>BERRIES&nbsp;&nbsp;</span>
     {/* Add more spans if you want even smoother scroll */}
   </div>
 </div>
 </main>
 <footer className="footer-section">
-  <video className="footer-video-bg" autoPlay loop muted playsInline>
-    <source src={videobg} type="video/mp4" />
-    {/* Add fallback text */}
-    Your browser does not support the video tag.
-  </video>
+  <div className="footer-bg-image"></div>
+  <div className="footer-overlay"></div>
 
-  <div className="footer-grid">
-    <div className="footer-brand">
-      <div className="footer-logo">
-        <span>G. Patel<br />& Deli</span>
-        <img src="/assets/mark.svg" alt="" className="footer-mark" />
+  <div className="footer-content">
+    <div className="footer-grid">
+      {/* Brand column only on left */}
+      <div className="footer-brand">
+        <div className="footer-logo">
+          <span>SKDSS Fruits</span>
+        </div>
+        <div className="footer-social">
+          <a href="#"><i className="fab fa-instagram"></i></a>
+          <a href="#"><i className="fab fa-whatsapp"></i></a>
+          <a href="#"><i className="fas fa-envelope"></i></a>
+        </div>
       </div>
-      <div className="footer-social">
-        {/* Social icons */}
-        <a href="#"><i className="fa-brands fa-instagram"></i></a>
-        <a href="#"><i className="fa-brands fa-whatsapp"></i></a>
-        <a href="#"><i className="fa-brands fa-envelope"></i></a>
+
+      {/* Contact info card */}
+      <div className="footer-card footer-contact">
+        <div>☎️ 9347043329 | 9010900688</div>
+        <div><span className="footer-email">arjun.gandreddi2005@gmail.com</span></div>
+        <div>Railway Market Rd, Shop 20,21<br />Allipuram, Vizag <br />Andhra Pradesh<br />India 530004</div>
       </div>
-    </div>
-    <div className="footer-contact">
-      <div>9347043329 | 9010900688<br />arjun.gandreddi2005@gmail.com</div>
-      <div>Railway Market Road - Shop no 20,21,<br />Allipuram, Vizag, Andhra Pradesh<br />INDIA, 530004</div>
-    </div>
-    <div className="footer-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Accessibility Statement</a>
-      <a href="#">Shipping Policy</a>
-      <a href="#">Terms & Conditions</a>
-      <a href="#">Refund Policy</a>
+      
+      {/* Links card */}
+      <div className="footer-card footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Accessibility Statement</a>
+        <a href="#">Shipping Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Refund Policy</a>
+      </div>
     </div>
   </div>
-
+  
   <div className="footer-bottom">
-    © 2035 by SKDSS Fruits 
-  </div>
-</footer>
+  © {new Date().getFullYear()} SKDSS Fruits - All rights reserved
+</div>
 
+</footer>
     </div>
   );
 }
